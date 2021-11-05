@@ -7,6 +7,7 @@ namespace VHS
     [RequireComponent(typeof(CharacterController))]
     public class FirstPersonController : MonoBehaviour
     {
+        [SerializeField] public LayerMask _layerMask;
         [Space, Header("Data")]
         [SerializeField] private MovementInputData movementInputData = null;
         [SerializeField] private HeadBobData headBobData = null;
@@ -70,6 +71,9 @@ namespace VHS
         private IEnumerator m_CrouchRoutine;
         private IEnumerator m_LandRoutine;
 
+        private bool oncePullUp = false;
+        private bool _fakeCrouch = false;
+
         #region Debug
         [Space]
         [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private Vector2 m_inputVector;
@@ -128,7 +132,38 @@ namespace VHS
                 // Check if Grounded,Wall etc
                 CheckIfGrounded();
                 CheckIfWall();
+                if (movementInputData.PullUpMode && m_hitWall && !m_isGrounded)
+                {
+                    if (!oncePullUp)
+                    {
+                        oncePullUp = true;
+                        //InvokeCrouchRoutine();
+                        
+                    }
+                    m_inAirTimer = 0;
+                    m_finalMoveVector.y = jumpSpeed;
 
+                    if (CheckIfRoof())
+                    {
+                       
+                        m_characterController.Move(Vector3.up * Time.deltaTime * 3);
+                        InvokeCrouchRoutine();
+                        _fakeCrouch = true;
+                    }
+                    else
+                    {
+                         m_characterController.Move(Vector3.up * Time.deltaTime);
+                    }
+                        //print("pullUp");
+                        return;
+                }
+                //print("m_hitWall "+ m_hitWall+ " m_isGrounded " + m_isGrounded);
+                if (_fakeCrouch && m_isGrounded)
+                {
+                    _fakeCrouch = false;
+                    //InvokeCrouchRoutine();
+                }
+                oncePullUp = false;
                 // Apply Smoothing
                 SmoothInput();
                 SmoothSpeed();
@@ -155,7 +190,7 @@ namespace VHS
                 m_previouslyGrounded = m_isGrounded;
             }
         }
- 
+
         protected virtual void GetComponents()
         {
             m_characterController = GetComponent<CharacterController>();
@@ -245,7 +280,6 @@ namespace VHS
             RaycastHit _wallInfo;
 
             bool _hitWall = false;
-
             if (movementInputData.HasInput && m_finalMoveDir.sqrMagnitude > 0)
                 _hitWall = Physics.SphereCast(_origin, rayObstacleSphereRadius, m_finalMoveDir, out _wallInfo, rayObstacleLength, obstacleLayers);
             Debug.DrawRay(_origin, m_finalMoveDir * rayObstacleLength, Color.blue);
@@ -258,7 +292,11 @@ namespace VHS
             Vector3 _origin = transform.position;
             RaycastHit _roofInfo;
 
-            bool _hitRoof = Physics.SphereCast(_origin, raySphereRadius, Vector3.up, out _roofInfo, m_initHeight);
+            bool _hitRoof = Physics.SphereCast(_origin, raySphereRadius, Vector3.up, out _roofInfo, m_initHeight, _layerMask);
+            if (_hitRoof)
+                Debug.Log("xxx " + _roofInfo.transform.gameObject.ToString());
+            else
+                Debug.Log("ray false ");
 
             return _hitRoof;
         }
@@ -331,7 +369,6 @@ namespace VHS
 
             if (m_LandRoutine != null)
                 StopCoroutine(m_LandRoutine);
-
             if (m_CrouchRoutine != null)
                 StopCoroutine(m_CrouchRoutine);
 
@@ -483,7 +520,6 @@ namespace VHS
             {
                 //m_finalMoveVector.y += jumpSpeed /* m_currentSpeed */; // we are adding because ex. when we are going on slope we want to keep Y value not overwriting it
                 m_finalMoveVector.y = jumpSpeed /* m_currentSpeed */; // turns out that when adding to Y it is too much and it doesn't feel correct because jumping on slope is much faster and higher;
-
                 m_previouslyGrounded = true;
                 m_isGrounded = false;
             }
@@ -494,7 +530,6 @@ namespace VHS
             {
                 m_inAirTimer = 0f;
                 m_finalMoveVector.y = -stickToGroundForce;
-
                 HandleJump();
             }
             else
