@@ -71,7 +71,7 @@ namespace VHS
         private IEnumerator m_CrouchRoutine;
         private IEnumerator m_LandRoutine;
 
-        private bool oncePullUp = false;
+        private bool _oncePullUp = false;
         private bool _fakeCrouch = false;
 
         #region Debug
@@ -132,30 +132,31 @@ namespace VHS
                 // Check if Grounded,Wall etc
                 CheckIfGrounded();
                 CheckIfWall();
-                if (movementInputData.PullUpMode && m_hitWall && !m_isGrounded)
+                
+                if (movementInputData.PullUpMode && m_hitWall && !m_isGrounded &&!CheckIfWallOnTop())
                 {
-                    if (!oncePullUp)
+                    if (!_oncePullUp)
                     {
-                        oncePullUp = true;
+                        _oncePullUp = true;
                         //InvokeCrouchRoutine();
-                        
+
                     }
                     m_inAirTimer = 0;
                     m_finalMoveVector.y = jumpSpeed;
 
                     if (CheckIfRoof())
                     {
-                       
+
                         m_characterController.Move(Vector3.up * Time.deltaTime * 3);
                         InvokeCrouchRoutine();
                         _fakeCrouch = true;
                     }
                     else
                     {
-                         m_characterController.Move(Vector3.up * Time.deltaTime);
+                        m_characterController.Move(Vector3.up * Time.deltaTime);
                     }
-                        //print("pullUp");
-                        return;
+                    //print("pullUp");
+                    return;
                 }
                 //print("m_hitWall "+ m_hitWall+ " m_isGrounded " + m_isGrounded);
                 if (_fakeCrouch && m_isGrounded)
@@ -163,7 +164,7 @@ namespace VHS
                     _fakeCrouch = false;
                     //InvokeCrouchRoutine();
                 }
-                oncePullUp = false;
+                _oncePullUp = false;
                 // Apply Smoothing
                 SmoothInput();
                 SmoothSpeed();
@@ -287,6 +288,20 @@ namespace VHS
             m_hitWall = _hitWall ? true : false;
         }
 
+        protected bool CheckIfWallOnTop()
+        {
+
+            Vector3 _origin = transform.position + Vector3.up * 2.5f;
+            RaycastHit _wallInfo;
+
+            bool _hitWall = false;
+            // (movementInputData.HasInput && m_finalMoveDir.sqrMagnitude > 0)
+                _hitWall = Physics.SphereCast(_origin, rayObstacleSphereRadius, m_finalMoveDir, out _wallInfo, rayObstacleLength, obstacleLayers);
+            Debug.DrawRay(_origin, m_finalMoveDir * rayObstacleLength, Color.red);
+
+            return _hitWall;
+        }
+
         protected virtual bool CheckIfRoof() /// TO FIX
         {
             Vector3 _origin = transform.position;
@@ -381,7 +396,6 @@ namespace VHS
             m_duringCrouchAnimation = true;
 
             float _percent = 0f;
-            float _smoothPercent = 0f;
             float _speed = 1f / crouchTransitionDuration;
 
             float _currentHeight = m_characterController.height;
@@ -400,7 +414,7 @@ namespace VHS
             while (_percent < 1f)
             {
                 _percent += Time.deltaTime * _speed;
-                _smoothPercent = crouchTransitionCurve.Evaluate(_percent);
+                float _smoothPercent = crouchTransitionCurve.Evaluate(_percent);
 
                 m_characterController.height = Mathf.Lerp(_currentHeight, _desiredHeight, _smoothPercent);
                 m_characterController.center = Vector3.Lerp(_currentCenter, _desiredCenter, _smoothPercent);
