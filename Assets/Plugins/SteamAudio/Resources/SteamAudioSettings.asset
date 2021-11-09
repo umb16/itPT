@@ -15,7 +15,7 @@ MonoBehaviour:
   audioEngine: 1
   SOFAFiles: []
   defaultMaterial: {fileID: 11400000, guid: a086f686223eed942816c70be67841b0, type: 2}
-  sceneType: 3
+  sceneType: 2
   layerMask:
     serializedVersion: 2
     m_Bits: 1

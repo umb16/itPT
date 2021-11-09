@@ -309,11 +309,6 @@ namespace VHS
             RaycastHit _roofInfo;
 
             bool _hitRoof = Physics.SphereCast(_origin, raySphereRadius, Vector3.up, out _roofInfo, m_initHeight, _layerMask);
-            if (_hitRoof)
-                Debug.Log("xxx " + _roofInfo.transform.gameObject.ToString());
-            else
-                Debug.Log("ray false ");
-
             return _hitRoof;
         }
 

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{e9501939-991a-4fa4-bb37-caeb39ee68e6}">
+		<property name="assetPath">
+			<value>122811__geodylabs__static-buzz.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>27.036734693877552</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{f0e89d6b-4840-4baa-845b-17214be6abcf}</destination>
+		</relationship>
+	</object>
+</objects>
