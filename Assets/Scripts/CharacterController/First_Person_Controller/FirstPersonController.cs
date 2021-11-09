@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
 using NaughtyAttributes;
+using FMODUnity;
 
 namespace VHS
 {
     [RequireComponent(typeof(CharacterController))]
     public class FirstPersonController : MonoBehaviour
     {
-        //[SerializeField] private FMODStudioEventEmitter fmodEmitter;
+        [SerializeField] private StudioEventEmitter _fmodEmitter;
         [SerializeField] public LayerMask _layerMask;
         [Space, Header("Data")]
         [SerializeField] private MovementInputData movementInputData = null;
@@ -475,7 +476,8 @@ namespace VHS
             {
                 if (!m_duringCrouchAnimation) // we want to make our head bob only if we are moving and not during crouch routine
                 {
-                    m_headBob.ScrollHeadBob(movementInputData.IsRunning && CanRun(), movementInputData.IsCrouching, movementInputData.InputVector);
+                    if (m_headBob.ScrollHeadBob(movementInputData.IsRunning && CanRun(), movementInputData.IsCrouching, movementInputData.InputVector))
+                        _fmodEmitter.Play();
                     m_yawTransform.localPosition = Vector3.Lerp(m_yawTransform.localPosition, (Vector3.up * m_headBob.CurrentStateHeight) + m_headBob.FinalOffset, Time.deltaTime * smoothHeadBobSpeed);
                 }
             }
