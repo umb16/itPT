@@ -7,6 +7,7 @@ namespace VHS
     [RequireComponent(typeof(CharacterController))]
     public class FirstPersonController : MonoBehaviour
     {
+        //[SerializeField] private FMODStudioEventEmitter fmodEmitter;
         [SerializeField] public LayerMask _layerMask;
         [Space, Header("Data")]
         [SerializeField] private MovementInputData movementInputData = null;
