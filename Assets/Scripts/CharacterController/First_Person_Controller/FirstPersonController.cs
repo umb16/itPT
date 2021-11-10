@@ -134,7 +134,7 @@ namespace VHS
                 // Check if Grounded,Wall etc
                 CheckIfGrounded();
                 CheckIfWall();
-                
+                _fmodEmitter.SetParameter("MoveSpeed", m_currentSpeed/runSpeed);
                 if (movementInputData.PullUpMode && m_hitWall && !m_isGrounded &&!CheckIfWallOnTop())
                 {
                     if (!_oncePullUp)

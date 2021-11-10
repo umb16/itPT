@@ -33,6 +33,9 @@
 		<relationship name="timeline">
 			<destination>{945b2a4b-b12f-44d5-a814-787b7a257cda}</destination>
 		</relationship>
+		<relationship name="parameters">
+			<destination>{f3ec0247-439a-4ffc-a93a-6562d7d723e5}</destination>
+		</relationship>
 		<relationship name="banks">
 			<destination>{ee073cb9-ec72-4ce7-9631-639f51fa1f19}</destination>
 		</relationship>
@@ -43,6 +46,9 @@
 		</relationship>
 	</object>
 	<object class="MasterTrack" id="{c573eef8-4ab0-46e1-976d-85103c1b79b4}">
+		<relationship name="automationTracks">
+			<destination>{d048bea2-8720-40e7-82bf-6349ef28c452}</destination>
+		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{e2d144a8-f0b8-4a58-b987-be0e9e061c6a}</destination>
 		</relationship>
@@ -91,7 +97,15 @@
 			<destination>{071e4dbf-c533-43ea-95c5-40e5bf74076e}</destination>
 		</relationship>
 	</object>
+	<object class="ParameterProxy" id="{f3ec0247-439a-4ffc-a93a-6562d7d723e5}">
+		<relationship name="preset">
+			<destination>{9e476369-08b6-4120-8dc3-d9aa2747e59c}</destination>
+		</relationship>
+	</object>
 	<object class="EventMixerMaster" id="{e2d144a8-f0b8-4a58-b987-be0e9e061c6a}">
+		<relationship name="automators">
+			<destination>{eb3f6da8-e28d-4d28-9ee8-95c0ee018a07}</destination>
+		</relationship>
 		<relationship name="effectChain">
 			<destination>{768d7e87-7ceb-49bf-88e7-0800d12cb6e1}</destination>
 		</relationship>
@@ -100,6 +114,11 @@
 		</relationship>
 		<relationship name="mixer">
 			<destination>{e51d763e-aa2c-42c4-bd7e-34eea51c47c3}</destination>
+		</relationship>
+	</object>
+	<object class="AutomationTrack" id="{d048bea2-8720-40e7-82bf-6349ef28c452}">
+		<relationship name="automator">
+			<destination>{eb3f6da8-e28d-4d28-9ee8-95c0ee018a07}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{17544f1d-1a55-43b1-8ddd-8499a57f39bf}">
@@ -203,6 +222,14 @@
 		</relationship>
 		<relationship name="output">
 			<destination>{e2d144a8-f0b8-4a58-b987-be0e9e061c6a}</destination>
+		</relationship>
+	</object>
+	<object class="Automator" id="{eb3f6da8-e28d-4d28-9ee8-95c0ee018a07}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>volume</value>
+		</property>
+		<relationship name="automationCurves">
+			<destination>{d91779fb-d702-446a-9297-95a37886f0c5}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusEffectChain" id="{768d7e87-7ceb-49bf-88e7-0800d12cb6e1}">
@@ -326,6 +353,16 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{1209c529-2e33-4302-bc2c-7b2c3c427ebe}" />
+	<object class="AutomationCurve" id="{d91779fb-d702-446a-9297-95a37886f0c5}">
+		<relationship name="parameter">
+			<destination>{9e476369-08b6-4120-8dc3-d9aa2747e59c}</destination>
+		</relationship>
+		<relationship name="automationPoints">
+			<destination>{f00aa81a-5d94-47e0-b7e3-27802d235a19}</destination>
+			<destination>{a3978e4d-c87c-4f8d-8b64-fe6e4a3ca595}</destination>
+			<destination>{2a77ef1d-40b0-45c8-8d7e-a7306ca085b3}</destination>
+		</relationship>
+	</object>
 	<object class="MixerBusFader" id="{62004b12-898c-41cd-a350-b61548341814}" />
 	<object class="MixerSend" id="{db839207-8932-4f6b-8a43-30bb5c8e2f93}">
 		<property name="level">
@@ -346,6 +383,30 @@
 	<object class="MixerBusFader" id="{6183ab61-150c-475a-bc04-67e71e6d9db8}" />
 	<object class="MixerBusFader" id="{98e5d96c-0207-4245-b32e-5d826af999dd}" />
 	<object class="MixerBusFader" id="{7586668b-e8c8-492e-95ef-7dd06b2a54cd}" />
+	<object class="AutomationPoint" id="{f00aa81a-5d94-47e0-b7e3-27802d235a19}">
+		<property name="position">
+			<value>0</value>
+		</property>
+		<property name="value">
+			<value>-80</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{a3978e4d-c87c-4f8d-8b64-fe6e4a3ca595}">
+		<property name="position">
+			<value>0.99946178686759946</value>
+		</property>
+		<property name="value">
+			<value>0</value>
+		</property>
+	</object>
+	<object class="AutomationPoint" id="{2a77ef1d-40b0-45c8-8d7e-a7306ca085b3}">
+		<property name="position">
+			<value>0.40043057050592029</value>
+		</property>
+		<property name="value">
+			<value>-9.58966064</value>
+		</property>
+	</object>
 	<object class="Plugin" id="{8aff6ebe-de9e-4eef-b17b-f6588e9b0664}">
 		<property name="identifier">
 			<value>Steam Audio Spatializer</value>
