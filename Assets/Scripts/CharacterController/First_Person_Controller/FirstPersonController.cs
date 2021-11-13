@@ -9,6 +9,7 @@ namespace VHS
     public class FirstPersonController : MonoBehaviour
     {
         [SerializeField] private StudioEventEmitter _fmodEmitter;
+        [SerializeField] private StudioEventEmitter _fmodHitEmitter;
         [SerializeField] public LayerMask _layerMask;
         [Space, Header("Data")]
         [SerializeField] private MovementInputData movementInputData = null;
@@ -134,7 +135,7 @@ namespace VHS
                 // Check if Grounded,Wall etc
                 CheckIfGrounded();
                 CheckIfWall();
-                _fmodEmitter.SetParameter("MoveSpeed", m_currentSpeed/runSpeed);
+                //_fmodEmitter.SetParameter("MoveSpeed", m_currentSpeed/runSpeed);
                 if (movementInputData.PullUpMode && m_hitWall && !m_isGrounded &&!CheckIfWallOnTop())
                 {
                     if (!_oncePullUp)
@@ -534,6 +535,7 @@ namespace VHS
                 m_finalMoveVector.y = jumpSpeed /* m_currentSpeed */; // turns out that when adding to Y it is too much and it doesn't feel correct because jumping on slope is much faster and higher;
                 m_previouslyGrounded = true;
                 m_isGrounded = false;
+                _fmodHitEmitter.Play();
             }
         }
         protected virtual void ApplyGravity()

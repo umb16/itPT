@@ -186,9 +186,6 @@
 		</relationship>
 	</object>
 	<object class="MultiSound" id="{071e4dbf-c533-43ea-95c5-40e5bf74076e}">
-		<property name="triggerProbabilityEnabled">
-			<value>true</value>
-		</property>
 		<property name="length">
 			<value>0.24199999999999999</value>
 		</property>
@@ -235,8 +232,8 @@
 	<object class="MixerBusEffectChain" id="{768d7e87-7ceb-49bf-88e7-0800d12cb6e1}">
 		<relationship name="effects">
 			<destination>{62004b12-898c-41cd-a350-b61548341814}</destination>
-			<destination>{db839207-8932-4f6b-8a43-30bb5c8e2f93}</destination>
 			<destination>{8722296a-0357-4a6a-b236-2a5c1bd97763}</destination>
+			<destination>{db839207-8932-4f6b-8a43-30bb5c8e2f93}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{012b073b-91a7-4dd5-9718-1311410da2ef}" />
@@ -364,6 +361,11 @@
 		</relationship>
 	</object>
 	<object class="MixerBusFader" id="{62004b12-898c-41cd-a350-b61548341814}" />
+	<object class="PluginEffect" id="{8722296a-0357-4a6a-b236-2a5c1bd97763}">
+		<relationship name="plugin">
+			<destination>{8aff6ebe-de9e-4eef-b17b-f6588e9b0664}</destination>
+		</relationship>
+	</object>
 	<object class="MixerSend" id="{db839207-8932-4f6b-8a43-30bb5c8e2f93}">
 		<property name="level">
 			<value>0</value>
@@ -375,11 +377,6 @@
 			<destination>{031a874a-645f-4145-ac47-cb89fdc9f7d3}</destination>
 		</relationship>
 	</object>
-	<object class="PluginEffect" id="{8722296a-0357-4a6a-b236-2a5c1bd97763}">
-		<relationship name="plugin">
-			<destination>{8aff6ebe-de9e-4eef-b17b-f6588e9b0664}</destination>
-		</relationship>
-	</object>
 	<object class="MixerBusFader" id="{6183ab61-150c-475a-bc04-67e71e6d9db8}" />
 	<object class="MixerBusFader" id="{98e5d96c-0207-4245-b32e-5d826af999dd}" />
 	<object class="MixerBusFader" id="{7586668b-e8c8-492e-95ef-7dd06b2a54cd}" />
@@ -388,7 +385,7 @@
 			<value>0</value>
 		</property>
 		<property name="value">
-			<value>-80</value>
+			<value>-50</value>
 		</property>
 	</object>
 	<object class="AutomationPoint" id="{a3978e4d-c87c-4f8d-8b64-fe6e4a3ca595}">
