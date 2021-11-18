@@ -7,10 +7,15 @@ public enum ObjectMobility
     Portable,
     Pocket
 }
-
+public enum ObjectType
+{
+    Thing,
+    Tool,
+}
 public class InteractiveObject : MonoBehaviour
 {
     [SerializeField] ObjectMobility _mobility;
+    [SerializeField] ObjectType _type;
     public ObjectMobility Mobility => _mobility;
     public float Mass => _rigidbody == null ? float.PositiveInfinity : _rigidbody.mass;
 

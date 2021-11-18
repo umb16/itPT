@@ -6,20 +6,20 @@ using UnityEngine.UI;
 using Zenject;
 using Cysharp.Threading.Tasks;
 
-[RequireComponent(typeof(Image))]
 public class CrosshairIcon : MonoBehaviour
 {
     [SerializeField] private Sprite[] _icons;
-    private Image _image;
+    [SerializeField] private Image _image;
+    //private Image _image;
     private CrosshairRaycast _crosshairRaycast;
 
     [Inject]
     private void Construct(CrosshairRaycast crosshairRaycast)
     {
         _crosshairRaycast = crosshairRaycast;
-        UniTaskAsyncEnumerable.EveryValueChanged(crosshairRaycast, x => x.HitInteractiveObject).ForEachAwaitAsync(async x =>
+        UniTaskAsyncEnumerable.EveryValueChanged(crosshairRaycast, x => x.HitInteractiveObject).Subscribe(x =>
         {
-            await UniTask.WaitForEndOfFrame();
+            //await UniTask.WaitForEndOfFrame();
             ObjectMobility mobility = x?.Mobility ?? ObjectMobility.Static;
             Debug.Log("mobility " + mobility);
             switch (mobility)
@@ -41,9 +41,9 @@ public class CrosshairIcon : MonoBehaviour
         });
     }
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        _image = GetComponent<Image>();
+        //_image = GetComponent<Image>();
     }
 
     // Update is called once per frame
