@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerReturn" id="{031a874a-645f-4145-ac47-cb89fdc9f7d3}">
+		<property name="overridingInputFormat">
+			<value>2</value>
+		</property>
+		<property name="name">
+			<value>Reverb</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{66f437ae-855e-4de7-a4d1-4278adf4187d}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{9820a803-9fea-4099-a2f1-cc897cdc2b38}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{44e1525d-e0a7-4295-a133-86f2af698759}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{66f437ae-855e-4de7-a4d1-4278adf4187d}">
+		<relationship name="effects">
+			<destination>{097ddd56-ae08-4261-b9e3-cd55bc28348c}</destination>
+			<destination>{e411f62d-fb0c-4b26-bb6a-7dd2a45fb68e}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{9820a803-9fea-4099-a2f1-cc897cdc2b38}" />
+	<object class="PluginEffect" id="{097ddd56-ae08-4261-b9e3-cd55bc28348c}">
+		<relationship name="plugin">
+			<destination>{5e4c3f7e-2651-4094-a5dc-422ca932baa5}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusFader" id="{e411f62d-fb0c-4b26-bb6a-7dd2a45fb68e}" />
+	<object class="Plugin" id="{5e4c3f7e-2651-4094-a5dc-422ca932baa5}">
+		<property name="identifier">
+			<value>Steam Audio Reverb</value>
+		</property>
+		<relationship name="pluginParameters">
+			<destination>{5be23bf4-af37-4eb8-8260-f696f1ea36da}</destination>
+		</relationship>
+	</object>
+	<object class="BoolPluginParameter" id="{5be23bf4-af37-4eb8-8260-f696f1ea36da}">
+		<property name="name">
+			<value>Binaural</value>
+		</property>
+		<property name="value">
+			<value>true</value>
+		</property>
+	</object>
+</objects>

@@ -87,10 +87,10 @@ crashlytics-build.properties
 # If the source bank files are kept outside of the StreamingAssets folder then these can be ignored.
 # Log files can be ignored.
 fmod_editor.log
-/FmodProj/proj/.cache
-/FmodProj/proj/.unsaved/
-/FmodProj/proj/.user/
-/FmodProj/proj/Build/
+/0OtherSources/FmodProj/proj/.cache/
+/0OtherSources/FmodProj/proj/.unsaved/
+/0OtherSources/FmodProj/proj/.user/
+/0OtherSources/FmodProj/proj/Build/
 
-SubstanceFiles
-/SubstainceDesignerFiles/.autosave/
+#SubstanceFiles
+/0OtherSources/SubstainceDesignerFiles/.autosave/
