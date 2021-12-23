@@ -9,26 +9,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcb8792a633d83f4f8f6885545aa7817, type: 3}
+  m_Script: {fileID: 11500000, guid: 728bedbba6495ca408a972244df31e4a, type: 3}
   m_Name: New Projection
   m_EditorClassIdentifier: 
   type: 0
   instanced: 0
   forceForward: 0
-  priority: 1
-  transparencyType: 1
-  cutoff: 0.01
+  priority: 0
+  transparencyType: 0
+  cutoff: 0.2
   tiling: {x: 0, y: 0}
   offset: {x: 0, y: 0}
   maskMethod: 0
   masks: 00000000
-  projectionLimit: 140.7
+  projectionLimit: 80
   _Cutoff: 130
   _TilingOffset: 402
   _MaskBase: 403
   _MaskLayers: 404
-  albedo:
-    texture: {fileID: 2800000, guid: 1543cb805e8c8474b8da0d3da6e99d57, type: 3}
-    color: {r: 1, g: 1, b: 1, a: 1}
+  shape:
+    texture: {fileID: 0}
+    multiplier: 1
     _MainTex: 16
-    _Color: 75
+    _Multiplier: 413
+  normal:
+    texture: {fileID: 0}
+    strength: 1
+    _BumpMap: 175
+    _BumpScale: 277
