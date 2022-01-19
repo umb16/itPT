@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DisplayCell : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Image _image;
+    public void SetImage(Sprite sprite)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        _image.sprite = sprite;
     }
 }
