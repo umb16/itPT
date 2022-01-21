@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class Display : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class Display : MonoBehaviour
 
     private DisplayCell[] _displayCells;
     private Dictionary<string, Sprite> _spritesPack;
-    private DisplayWriter _displayWriter;
+    //private DisplayWriter _displayWriter;
     private int CanvasWidth => (int)_canvasTransform.sizeDelta.x;
     private int CanvasHeight => (int)_canvasTransform.sizeDelta.y;
 
@@ -22,14 +23,16 @@ public class Display : MonoBehaviour
     private int _sizeX;
     private int _sizeY;
 
-    private void Start()
+    [Inject]
+    private void Construct()
     {
         _spritesPack = Resources.LoadAll<Sprite>(_spritesPath).ToDictionary((x) => x.name);
         Create(20, 30, 54);
-        //SetCell(0, 0, WarpedbConvertor.ConvertCyrToTranslit('æ')[0]);
-        _displayWriter = new DisplayWriter(this);
+    }
 
-       /// _displayWriter.Print(" M%n",50000);
+    private void Start()
+    {
+       
     }
 
     public void DestroyCells()

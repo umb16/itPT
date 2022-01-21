@@ -9,43 +9,10 @@ public class DisplayWriter
     [SerializeField] private Display _display;
     private Vector2Int _cursorPos = Vector2Int.zero;
 
-    public DisplayWriter(Display display)
+    public DisplayWriter(Display display) 
     {
         _display = display;
         bool showCursor = false;
-        int count = 0;
-        UniTaskAsyncEnumerable
-            .Timer(new System.TimeSpan(), new System.TimeSpan(0, 0, 0, 0, 50))
-            .ForEachAwaitAsync(async _ =>
-            {
-                await UniTask.NextFrame();
-                showCursor = !showCursor;
-                //DisplayCursor(showCursor);
-                count+=100;
-                Reset();
-                _display.Clear();
-                NewLine();
-                PrintN(" новогодн€€ распродажа");
-                Print(" M");
-                Print(WarpedbConvertor.GenerateBar(5, 9999, new char[] { ',', '.', 'i', '|', 'l', 'b', 'B' }, (count) % 9999));
-                PrintN("р");
-                Print(" D");
-                Print(WarpedbConvertor.GenerateBar(5, 9999, new char[] { ',', '.', 'i', '|', 'l', 'b', 'B' }, (count) % 9999));
-                PrintN("р");
-                Print(" E");
-                Print(WarpedbConvertor.GenerateBar(5, 9999, new char[] { ',', '.', 'i', '|', 'l', 'b', 'B' }, (count) % 9999));
-                PrintN("р");
-                Print(" h");
-                Print(WarpedbConvertor.GenerateBar(5, 9999, new char[] { ',', '.', 'i', '|', 'l', 'b', 'B' }, (count) % 9999));
-                PrintN("р");
-                Print(" S");
-                Print(WarpedbConvertor.GenerateBar(5, 9999, new char[] { ',', '.', 'i', '|', 'l', 'b', 'B' }, (count) % 9999));
-                PrintN("р");
-                Print((new char[]{',', 'i', '|', 'l', 'b', 'B', 'b', 'l','|', 'i'})[count%10].ToString());
-                PrintN((new char[]{'|', 'l', 'b', 'B', 'b', 'l','|'})[count%7].ToString());
-                //Print(WarpedbConvertor.GenerateBar(5, 9999, new char[] { ',', '.', 'i', '|', 'l', 'b', 'B' }, (count)%9999));
-                //PrintN("р");
-            });
     }
 
     public void NewLine()
