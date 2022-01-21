@@ -846,7 +846,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 77610698}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4317557316fefd4abb59a1f2dcf14ed, type: 3}
   m_Name: 
@@ -2286,6 +2286,7 @@ GameObject:
   - component: {fileID: 430215538}
   - component: {fileID: 430215537}
   - component: {fileID: 430215536}
+  - component: {fileID: 430215540}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -2371,6 +2372,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &430215540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430215535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d2357b06076deb45aa9631c1c5f7a80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mobility: 2
+  _type: 0
 --- !u!1001 &449846150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3465,6 +3480,17 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
+--- !u!114 &769551486 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1224913516031815862, guid: 7566fa058821c8a4a94f189ebc1ccc96, type: 3}
+  m_PrefabInstance: {fileID: 449846150}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 769551477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4317557316fefd4abb59a1f2dcf14ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &794949390
 GameObject:
   m_ObjectHideFlags: 0
@@ -4612,6 +4638,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1354860839}
   - component: {fileID: 1354860838}
+  - component: {fileID: 1354860841}
   - component: {fileID: 1354860840}
   - component: {fileID: 1354860837}
   m_Layer: 0
@@ -4647,6 +4674,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
+  - {fileID: 1354860841}
   - {fileID: 1354860840}
   - {fileID: 1354860837}
   _installerPrefabs: []
@@ -4694,6 +4722,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _display: {fileID: 562444875}
+--- !u!114 &1354860841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354860836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06503417450c74c4fb6b872c3420298b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _crosshairRaycast: {fileID: 769551486}
 --- !u!43 &1388841312
 Mesh:
   m_ObjectHideFlags: 0

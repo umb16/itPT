@@ -9,10 +9,9 @@ public class DisplayWriter
     [SerializeField] private Display _display;
     private Vector2Int _cursorPos = Vector2Int.zero;
 
-    public DisplayWriter(Display display) 
+    public DisplayWriter(Display display)
     {
         _display = display;
-        bool showCursor = false;
     }
 
     public void NewLine()
@@ -35,8 +34,17 @@ public class DisplayWriter
         _cursorPos.x = x;
         _cursorPos.y = y;
     }
+    public void SetCursorPos(Vector2Int pos)
+    {
+        _cursorPos = pos;
+    }
 
     public void Print(string text, params int[] numbers)
+    {
+        Print(text, false, numbers);
+    }
+
+    public void Print(string text, bool soft, params int[] numbers)
     {
         int currentNumberIndex = 0;
         string[] strings = text.Split("%n");
@@ -52,14 +60,9 @@ public class DisplayWriter
         }
         foreach (var key in keys)
         {
-            _display.SetCell(_cursorPos.x, _cursorPos.y, key);
+            _display.SetCell(_cursorPos.x, _cursorPos.y, key, soft).Forget();
             _cursorPos.x++;
         }
-    }
-
-    private void DisplayCursor(bool value)
-    {
-        _display.SetCell(_cursorPos.x, _cursorPos.y, value ? "cursor" : "space");
     }
 
     public void PrintN(string text, params int[] numbers)
