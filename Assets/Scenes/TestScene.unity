@@ -1514,13 +1514,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.77431405, b: 0.5411765, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 585369115, guid: eb5c7149b509e614aa2e5a2715803fe8, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2827,7 +2827,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cellPrefab: {fileID: 269363872}
   _canvasTransform: {fileID: 562444879}
-  _spritesPath: Letters
+  _spritesPath: Letters/Font0Standart
+  _spritesPaths:
+  - Letters/Font0Standart
+  - Letters/Font0Inverted
 --- !u!114 &562444876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2880,7 +2883,7 @@ Canvas:
   m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 1
+  m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0

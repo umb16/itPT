@@ -13,11 +13,38 @@ public class Display : MonoBehaviour
 {
     [SerializeField] private GameObject _cellPrefab;
     [SerializeField] private RectTransform _canvasTransform;
-    [SerializeField] private string _spritesPath;
+    [SerializeField] private string[] _spritesPaths;
 
     private DisplayCell[] _displayCells;
     private CancellationTokenSource _cancellationTokenSource;
-    private Dictionary<string, Sprite> _spritesPack;
+
+    public class SpritesPacks
+    {
+        private Dictionary<string, Sprite>[] _dictinaries;
+        public int _packIndex = 0;
+
+        public SpritesPacks(string[] paths)
+        {
+            _dictinaries = new Dictionary<string, Sprite>[paths.Length];
+            for (int i = 0; i < paths.Length; i++)
+            {
+                _dictinaries[i] = Resources.LoadAll<Sprite>(paths[i]).ToDictionary((x) => x.name);
+            }
+        }
+
+        public void SetPackIndex(int index)
+        {
+            _packIndex = Mathf.Max(0, Mathf.Min(_dictinaries.Length-1, index));
+            
+        }
+
+        public Sprite GetSprite(string name)
+        {
+            return _dictinaries[_packIndex][name];
+        }
+    }
+
+    private SpritesPacks _spritesPacks;
     //private DisplayWriter _displayWriter;
     private int CanvasWidth => (int)_canvasTransform.sizeDelta.x;
     private int CanvasHeight => (int)_canvasTransform.sizeDelta.y;
@@ -34,7 +61,8 @@ public class Display : MonoBehaviour
     private void Construct(CancellationTokenSource cancellationTokenSource)
     {
         _cancellationTokenSource = cancellationTokenSource;
-        _spritesPack = Resources.LoadAll<Sprite>(_spritesPath).ToDictionary((x) => x.name);
+
+        _spritesPacks = new SpritesPacks(_spritesPaths);
 
     }
 
@@ -58,11 +86,19 @@ public class Display : MonoBehaviour
         }
     }
 
+    public void InvertPack(bool value)
+    {
+        if (value)
+            _spritesPacks.SetPackIndex(1);
+        else
+            _spritesPacks.SetPackIndex(0);
+    }
+
     public void Clear()
     {
         foreach (var cell in _displayCells)
         {
-            cell.SetImage(_spritesPack["space"], true);
+            cell.SetImage(_spritesPacks.GetSprite("space"), true);
         }
     }
 
@@ -72,7 +108,7 @@ public class Display : MonoBehaviour
             await UniTask.WaitUntil(() => Ready, cancellationToken: _cancellationTokenSource.Token);
         var currentCell = _displayCells[(x + y * _sizeX) % (_sizeX * _sizeY)];
         if (currentCell.Empty && soft || !soft)
-            currentCell.SetImage(_spritesPack[id], soft);
+            currentCell.SetImage(_spritesPacks.GetSprite(id), soft);
     }
 
     public void Create(int ysize, int cellSizex, int cellSizey)
@@ -91,7 +127,7 @@ public class Display : MonoBehaviour
                 cell.GetComponent<RectTransform>().anchoredPosition = new Vector3(x * cellSizex, -y * cellSizey, 0);
                 var displayCell = cell.GetComponent<DisplayCell>();
                 displayCell.GetComponent<RectTransform>().sizeDelta = new Vector2(cellSizex, cellSizey);
-                displayCell.SetImage(_spritesPack["space"], true);
+                displayCell.SetImage(_spritesPacks.GetSprite("space"), true);
                 _displayCells[x + y * _sizeX] = displayCell;
                 cell.SetActive(true);
             }

@@ -17,7 +17,7 @@ public class Entity
 
     private async UniTask Regen()
     {
-        await foreach (var _ in UniTaskAsyncEnumerable.Timer(new TimeSpan(), TimeSpan.FromSeconds(1)))
+        await foreach (var _ in UniTaskAsyncEnumerable.Timer(new TimeSpan(), TimeSpan.FromSeconds(.1)))
         {
             _statContainer.Void.Value += _statContainer.VoidRegen.Value;
         }

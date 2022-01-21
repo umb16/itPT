@@ -31,12 +31,21 @@ public class DisplayWriter
 
     public void SetCursorPos(int x, int y)
     {
+        if (x < 0)
+            x = _display.SizeX + x;
+        if (y < 0)
+            y = _display.SizeY + y;
         _cursorPos.x = x;
         _cursorPos.y = y;
     }
     public void SetCursorPos(Vector2Int pos)
     {
         _cursorPos = pos;
+    }
+
+    public void InvertPack(bool value)
+    {
+        _display.InvertPack(value);
     }
 
     public void Print(string text, params int[] numbers)

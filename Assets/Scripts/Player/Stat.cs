@@ -17,8 +17,8 @@ public class Stat
                 value = _maxValue;
             if (value != _value)
             {
-                ValueChanged?.Invoke();
                 _value = value;
+                ValueChanged?.Invoke();
             }
         }
     }

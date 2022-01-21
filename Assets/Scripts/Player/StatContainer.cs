@@ -19,9 +19,9 @@ public class StatContainer
         Health = new Stat(health, 100, 'h');
         Cheerfulness = new Stat(cheerfulness, 100, 'M');
         Energy = new Stat(energy, 100, 'E');
-        Water = new Stat(energy, 100, 'D');
-        Cold = new Stat(energy, 100, 'S');
-        Void = new Stat(energy, 100, 's');
+        Water = new Stat(water, 100, 'D');
+        Cold = new Stat(cold, 100, 'S');
+        Void = new Stat(@void, 100, 's');
         Stats = new Stat[] { Health, Cheerfulness, Energy, Water, Cold, Void};
     }
 

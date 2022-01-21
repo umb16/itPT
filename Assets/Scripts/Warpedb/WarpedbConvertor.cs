@@ -58,6 +58,15 @@ public static class WarpedbConvertor
         { 'l', new string[]{"brick3"}},
         { 'b', new string[]{"brick4"}},
         { 'B', new string[]{"brick5"}},
+        { '1', new string[]{"t1"}},
+        { '2', new string[]{"t2"}},
+        { '3', new string[]{"t3"}},
+        { '7', new string[]{"t7"}},
+        { '8', new string[]{"t8"}},
+        { '9', new string[]{"t9"}},
+        { 'T', new string[]{"t789"}},
+        { 't', new string[]{"t123"}},
+
     };
 
     public static string[] ConvertStringToKeys(string value)
@@ -66,7 +75,7 @@ public static class WarpedbConvertor
         var chars = value.ToCharArray();
         foreach (var item in chars)
         {
-           var x = ConvertCyrToTranslit(item);
+            var x = ConvertCyrToTranslit(item);
             if (x != null)
                 result.AddRange(x);
         }
@@ -94,7 +103,11 @@ public static class WarpedbConvertor
         numbers.Reverse();
         if (numbers.Count % 2 == 1)
         {
-            result.Add(numbers[0].ToString());
+            result.Add("-10");
+            if (numbers[0] == 0)
+                result.Add("0-1");
+            else
+                result.Add("0" + numbers[0].ToString());
             numbers.RemoveAt(0);
         }
         for (int i = 0; i < numbers.Count; i += 2)
@@ -120,7 +133,7 @@ public static class WarpedbConvertor
         {
             if (i * step >= value)
             {
-                result+=" ";
+                result += " ";
             }
             else
             {

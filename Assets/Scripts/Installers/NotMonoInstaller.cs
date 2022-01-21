@@ -7,7 +7,7 @@ public class NotMonoInstaller : MonoInstaller
 {
     public override void InstallBindings()
     {
-        var statContainer = new StatContainer(20, 20, 20, 20, 0, 0);
+        var statContainer = new StatContainer(Random.Range(0,100), Random.Range(0, 100), Random.Range(0, 100), Random.Range(0, 100), 0, 0);
         Container.Bind<StatContainer>().FromInstance(statContainer).AsSingle();
         Container.Bind<Entity>().AsSingle().NonLazy();
 
@@ -15,6 +15,6 @@ public class NotMonoInstaller : MonoInstaller
         Container.Bind<StatsVisualizer>().AsSingle().NonLazy();
         Container.Bind<CrosshairIconVisualizer>().AsSingle().NonLazy();
         Container.Bind<DisplayDebug>().AsSingle().NonLazy();
-
+        Container.Bind<DisplayDataTime>().AsSingle().NonLazy();
     }
 }
