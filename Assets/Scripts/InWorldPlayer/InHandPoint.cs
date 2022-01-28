@@ -3,6 +3,8 @@ using Cysharp.Threading.Tasks.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VHS;
+using Zenject;
 
 public class InHandPoint : MonoBehaviour
 {
@@ -11,7 +13,6 @@ public class InHandPoint : MonoBehaviour
     [SerializeField] private Collider _collider;
     [SerializeField] private LayerMask _layerMask;
     private Vector3 _pointTo;
-
 
     void Awake()
     {

@@ -9,6 +9,7 @@ public class CrosshairRaycast : MonoBehaviour
     [SerializeField] private float _maxDistance = 2;
     [SerializeField] private bool _debug;
 
+    public Vector3 GlobalDir => _centerTransform.forward;
     public GameObject HitObject => _hit.transform?.gameObject;
     public InteractiveObject HitInteractiveObject => _hit.transform?.GetComponent<InteractiveObject>();
 

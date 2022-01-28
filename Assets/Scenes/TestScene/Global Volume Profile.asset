@@ -65,6 +65,9 @@ MonoBehaviour:
   enabled:
     m_OverrideState: 1
     m_Value: 1
+  enabledTransparent:
+    m_OverrideState: 0
+    m_Value: 1
   tracing:
     m_OverrideState: 0
     m_Value: 1
@@ -351,7 +354,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9008a067f4d626c4d8bc4bc48f04bb89, type: 3}
   m_Name: AmbientOcclusion
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   quality:
     m_OverrideState: 1
     m_Value: 1

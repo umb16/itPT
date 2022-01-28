@@ -35,7 +35,7 @@ public class InteractiveObject : MonoBehaviour
         GetComponentsInChildren<Rigidbody>().All(x => x.isKinematic = true);
         gameObject.layer = layer;
     }
-    public async void ToFreeMode()
+    public async void ToFreeMode(Vector3 push)
     {
         GetComponentsInChildren<Collider>().All(x => x.enabled = true);
         GetComponentsInChildren<Rigidbody>().All(x =>
@@ -44,6 +44,7 @@ public class InteractiveObject : MonoBehaviour
             x.WakeUp();
             return true;
         });
+        _rigidbody.AddForce(push);
         await UniTask.Delay(1000, cancellationToken: _cancellationTokenSource.Token);
         gameObject.layer = _startLayer;
     }

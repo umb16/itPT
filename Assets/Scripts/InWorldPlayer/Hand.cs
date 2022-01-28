@@ -49,7 +49,7 @@ public class Hand
             {
                 Debug.Log("Hand ->" + _interactiveObject.name);
                 _interactiveObject.transform.SetParent(null);
-                _interactiveObject.ToFreeMode();
+                _interactiveObject.ToFreeMode(_crosshairRaycast.GlobalDir * 100);
                 _interactiveObject = null;
             }
         }

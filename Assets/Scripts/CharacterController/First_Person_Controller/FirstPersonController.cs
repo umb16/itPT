@@ -20,21 +20,21 @@ namespace VHS
         [SerializeField] private float walkSpeed = 2f;
         [SerializeField] private float runSpeed = 3f;
         [SerializeField] private float jumpSpeed = 5f;
-        [Slider(0f, 1f)] [SerializeField] private float moveBackwardsSpeedPercent = 0.5f;
-        [Slider(0f, 1f)] [SerializeField] private float moveSideSpeedPercent = 0.75f;
+        [Slider(0f, 1f)][SerializeField] private float moveBackwardsSpeedPercent = 0.5f;
+        [Slider(0f, 1f)][SerializeField] private float moveSideSpeedPercent = 0.75f;
 
         [Space, Header("Run Settings")]
-        [Slider(-1f, 1f)] [SerializeField] private float canRunThreshold = 0.8f;
+        [Slider(-1f, 1f)][SerializeField] private float canRunThreshold = 0.8f;
         [SerializeField] private AnimationCurve runTransitionCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
         [Space, Header("Crouch Settings")]
-        [Slider(0.2f, 0.9f)] [SerializeField] private float crouchPercent = 0.6f;
+        [Slider(0.2f, 0.9f)][SerializeField] private float crouchPercent = 0.6f;
         [SerializeField] private float crouchTransitionDuration = 1f;
         [SerializeField] private AnimationCurve crouchTransitionCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
 
         [Space, Header("Landing Settings")]
-        [Slider(0.05f, 0.5f)] [SerializeField] private float lowLandAmount = 0.1f;
-        [Slider(0.2f, 0.9f)] [SerializeField] private float highLandAmount = 0.6f;
+        [Slider(0.05f, 0.5f)][SerializeField] private float lowLandAmount = 0.1f;
+        [Slider(0.2f, 0.9f)][SerializeField] private float highLandAmount = 0.6f;
         [SerializeField] private float landTimer = 0.5f;
         [SerializeField] private float landDuration = 1f;
         [SerializeField] private AnimationCurve landCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 1f);
@@ -44,28 +44,28 @@ namespace VHS
         [SerializeField] private float stickToGroundForce = 5f;
 
         [SerializeField] private LayerMask groundLayer = ~0;
-        [Slider(0f, 1f)] [SerializeField] private float rayLength = 0.1f;
-        [Slider(0.01f, 1f)] [SerializeField] private float raySphereRadius = 0.1f;
+        [Slider(0f, 1f)][SerializeField] private float rayLength = 0.1f;
+        [Slider(0.01f, 1f)][SerializeField] private float raySphereRadius = 0.1f;
 
         [Space, Header("Check Wall Settings")]
         [SerializeField] private LayerMask obstacleLayers = ~0;
-        [Slider(0f, 1f)] [SerializeField] private float rayObstacleLength = 0.1f;
-        [Slider(0.01f, 1f)] [SerializeField] private float rayObstacleSphereRadius = 0.1f;
+        [Slider(0f, 1f)][SerializeField] private float rayObstacleLength = 0.1f;
+        [Slider(0.01f, 1f)][SerializeField] private float rayObstacleSphereRadius = 0.1f;
 
         [Space, Header("Smooth Settings")]
-        [Range(1f, 100f)] [SerializeField] private float smoothRotateSpeed = 5f;
-        [Range(1f, 100f)] [SerializeField] private float smoothInputSpeed = 5f;
-        [Range(1f, 100f)] [SerializeField] private float smoothVelocitySpeed = 5f;
-        [Range(1f, 100f)] [SerializeField] private float smoothFinalDirectionSpeed = 5f;
-        [Range(1f, 100f)] [SerializeField] private float smoothHeadBobSpeed = 5f;
+        [Range(1f, 100f)][SerializeField] private float smoothRotateSpeed = 5f;
+        [Range(1f, 100f)][SerializeField] private float smoothInputSpeed = 5f;
+        [Range(1f, 100f)][SerializeField] private float smoothVelocitySpeed = 5f;
+        [Range(1f, 100f)][SerializeField] private float smoothFinalDirectionSpeed = 5f;
+        [Range(1f, 100f)][SerializeField] private float smoothHeadBobSpeed = 5f;
 
         [Space]
         [SerializeField] private bool experimental = false;
         [InfoBox("It should smooth our player movement to not start fast and not stop fast but it's somehow jerky", InfoBoxType.Warning)]
         [Tooltip("If set to very high it will stop player immediately after releasing input, otherwise it just another smoothing to our movement to make our player not move fast immediately and not stop immediately")]
-        [ShowIf("experimental")] [Range(1f, 100f)] [SerializeField] private float smoothInputMagnitudeSpeed = 5f;
+        [ShowIf("experimental")][Range(1f, 100f)][SerializeField] private float smoothInputMagnitudeSpeed = 5f;
 
-        private CharacterController m_characterController;
+        public CharacterController CharController { get; private set; }
         private Transform m_yawTransform;
         private HeadBob m_headBob;
         private CameraController m_cameraController;
@@ -79,44 +79,44 @@ namespace VHS
 
         #region Debug
         [Space]
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private Vector2 m_inputVector;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private Vector2 m_smoothInputVector;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private Vector2 m_inputVector;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private Vector2 m_smoothInputVector;
 
         [Space]
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private Vector3 m_finalMoveDir;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private Vector3 m_smoothFinalMoveDir;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private Vector3 m_finalMoveDir;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private Vector3 m_smoothFinalMoveDir;
         [Space]
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private Vector3 m_finalMoveVector;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private Vector3 m_finalMoveVector;
 
         [Space]
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private float m_currentSpeed;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private float m_smoothCurrentSpeed;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private float m_finalSmoothCurrentSpeed;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private float m_walkRunSpeedDifference;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private float m_currentSpeed;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private float m_smoothCurrentSpeed;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private float m_finalSmoothCurrentSpeed;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private float m_walkRunSpeedDifference;
 
         [Space]
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private float m_finalRayLength;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private bool m_hitWall;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private bool m_isGrounded;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private bool m_previouslyGrounded;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private float m_finalRayLength;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private bool m_hitWall;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private bool m_isGrounded;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private bool m_previouslyGrounded;
 
         [Space]
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private float m_initHeight;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private float m_crouchHeight;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private Vector3 m_initCenter;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private Vector3 m_crouchCenter;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private float m_initHeight;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private float m_crouchHeight;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private Vector3 m_initCenter;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private Vector3 m_crouchCenter;
         [Space]
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private float m_initCamHeight;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private float m_crouchCamHeight;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private float m_crouchStandHeightDifference;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private bool m_duringCrouchAnimation;
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private bool m_duringRunAnimation;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private float m_initCamHeight;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private float m_crouchCamHeight;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private float m_crouchStandHeightDifference;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private bool m_duringCrouchAnimation;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private bool m_duringRunAnimation;
         [Space]
-        [BoxGroup("DEBUG")] [SerializeField] [ReadOnly] private float m_inAirTimer;
+        [BoxGroup("DEBUG")][SerializeField][ReadOnly] private float m_inAirTimer;
 
         [Space]
-        [BoxGroup("DEBUG")] [ShowIf("experimental")] [SerializeField] [ReadOnly] private float m_inputVectorMagnitude;
-        [BoxGroup("DEBUG")] [ShowIf("experimental")] [SerializeField] [ReadOnly] private float m_smoothInputVectorMagnitude;
+        [BoxGroup("DEBUG")][ShowIf("experimental")][SerializeField][ReadOnly] private float m_inputVectorMagnitude;
+        [BoxGroup("DEBUG")][ShowIf("experimental")][SerializeField][ReadOnly] private float m_smoothInputVectorMagnitude;
         #endregion
 
         protected virtual void Start()
@@ -130,13 +130,13 @@ namespace VHS
             if (m_yawTransform != null)
                 RotateTowardsCamera();
 
-            if (m_characterController)
+            if (CharController)
             {
                 // Check if Grounded,Wall etc
                 CheckIfGrounded();
                 CheckIfWall();
                 //_fmodEmitter.SetParameter("MoveSpeed", m_currentSpeed/runSpeed);
-                if (movementInputData.PullUpMode && m_hitWall && !m_isGrounded &&!CheckIfWallOnTop())
+                if (movementInputData.PullUpMode && m_hitWall && !m_isGrounded && !CheckIfWallOnTop())
                 {
                     if (!_oncePullUp)
                     {
@@ -150,13 +150,13 @@ namespace VHS
                     if (CheckIfRoof())
                     {
 
-                        m_characterController.Move(Vector3.up * Time.deltaTime * 3);
+                        CharController.Move(Vector3.up * Time.deltaTime * 3);
                         InvokeCrouchRoutine();
                         _fakeCrouch = true;
                     }
                     else
                     {
-                        m_characterController.Move(Vector3.up * Time.deltaTime);
+                        CharController.Move(Vector3.up * Time.deltaTime);
                     }
                     //print("pullUp");
                     return;
@@ -197,7 +197,7 @@ namespace VHS
 
         protected virtual void GetComponents()
         {
-            m_characterController = GetComponent<CharacterController>();
+            CharController = GetComponent<CharacterController>();
             m_cameraController = GetComponentInChildren<CameraController>();
             m_yawTransform = m_cameraController.transform;
             m_headBob = new HeadBob(headBobData, moveBackwardsSpeedPercent, moveSideSpeedPercent);
@@ -206,13 +206,13 @@ namespace VHS
         protected virtual void InitVariables()
         {
             // Calculate where our character center should be based on height and skin width
-            m_characterController.center = new Vector3(0f, m_characterController.height / 2f + m_characterController.skinWidth, 0f);
+            CharController.center = new Vector3(0f, CharController.height / 2f + CharController.skinWidth, 0f);
 
-            m_initCenter = m_characterController.center;
-            m_initHeight = m_characterController.height;
+            m_initCenter = CharController.center;
+            m_initHeight = CharController.height;
 
             m_crouchHeight = m_initHeight * crouchPercent;
-            m_crouchCenter = (m_crouchHeight / 2f + m_characterController.skinWidth) * Vector3.up;
+            m_crouchCenter = (m_crouchHeight / 2f + CharController.skinWidth) * Vector3.up;
 
             m_crouchStandHeightDifference = m_initHeight - m_crouchHeight;
 
@@ -220,7 +220,7 @@ namespace VHS
             m_crouchCamHeight = m_initCamHeight - m_crouchStandHeightDifference;
 
             // Sphere radius not included. If you want it to be included just decrease by sphere radius at the end of this equation
-            m_finalRayLength = rayLength + m_characterController.center.y;
+            m_finalRayLength = rayLength + CharController.center.y;
 
             m_isGrounded = true;
             m_previouslyGrounded = true;
@@ -269,7 +269,7 @@ namespace VHS
         // Locomotion Calculation Methods
         protected virtual void CheckIfGrounded()
         {
-            Vector3 _origin = transform.position + m_characterController.center;
+            Vector3 _origin = transform.position + CharController.center;
 
             bool _hitGround = Physics.SphereCast(_origin, raySphereRadius, Vector3.down, out m_hitInfo, m_finalRayLength, groundLayer);
             Debug.DrawRay(_origin, Vector3.down * (m_finalRayLength), Color.red);
@@ -280,7 +280,7 @@ namespace VHS
         protected virtual void CheckIfWall()
         {
 
-            Vector3 _origin = transform.position + m_characterController.center;
+            Vector3 _origin = transform.position + CharController.center;
             RaycastHit _wallInfo;
 
             bool _hitWall = false;
@@ -299,7 +299,7 @@ namespace VHS
 
             bool _hitWall = false;
             // (movementInputData.HasInput && m_finalMoveDir.sqrMagnitude > 0)
-                _hitWall = Physics.SphereCast(_origin, rayObstacleSphereRadius, m_finalMoveDir, out _wallInfo, rayObstacleLength, obstacleLayers);
+            _hitWall = Physics.SphereCast(_origin, rayObstacleSphereRadius, m_finalMoveDir, out _wallInfo, rayObstacleLength, obstacleLayers);
             Debug.DrawRay(_origin, m_finalMoveDir * rayObstacleLength, Color.red);
 
             return _hitWall;
@@ -363,7 +363,7 @@ namespace VHS
             m_finalMoveVector.x = _finalVector.x;
             m_finalMoveVector.z = _finalVector.z;
 
-            if (m_characterController.isGrounded) // Thanks to this check we are not applying extra y velocity when in air so jump will be consistent
+            if (CharController.isGrounded) // Thanks to this check we are not applying extra y velocity when in air so jump will be consistent
                 m_finalMoveVector.y += _finalVector.y; //so this makes our player go in forward dir using slope normal but when jumping this is making it go higher so this is weird
         }
 
@@ -396,8 +396,8 @@ namespace VHS
             float _percent = 0f;
             float _speed = 1f / crouchTransitionDuration;
 
-            float _currentHeight = m_characterController.height;
-            Vector3 _currentCenter = m_characterController.center;
+            float _currentHeight = CharController.height;
+            Vector3 _currentCenter = CharController.center;
 
             float _desiredHeight = movementInputData.IsCrouching ? m_initHeight : m_crouchHeight;
             Vector3 _desiredCenter = movementInputData.IsCrouching ? m_initCenter : m_crouchCenter;
@@ -414,8 +414,8 @@ namespace VHS
                 _percent += Time.deltaTime * _speed;
                 float _smoothPercent = crouchTransitionCurve.Evaluate(_percent);
 
-                m_characterController.height = Mathf.Lerp(_currentHeight, _desiredHeight, _smoothPercent);
-                m_characterController.center = Vector3.Lerp(_currentCenter, _desiredCenter, _smoothPercent);
+                CharController.height = Mathf.Lerp(_currentHeight, _desiredHeight, _smoothPercent);
+                CharController.center = Vector3.Lerp(_currentCenter, _desiredCenter, _smoothPercent);
 
                 _camPos.y = Mathf.Lerp(_camCurrentHeight, _camDesiredHeight, _smoothPercent);
                 m_yawTransform.localPosition = _camPos;
@@ -540,7 +540,7 @@ namespace VHS
         }
         protected virtual void ApplyGravity()
         {
-            if (m_characterController.isGrounded) // if we would use our own m_isGrounded it would not work that good, this one is more precise
+            if (CharController.isGrounded) // if we would use our own m_isGrounded it would not work that good, this one is more precise
             {
                 m_inAirTimer = 0f;
                 m_finalMoveVector.y = -stickToGroundForce;
@@ -555,7 +555,7 @@ namespace VHS
 
         protected virtual void ApplyMovement()
         {
-            m_characterController.Move(m_finalMoveVector * Time.deltaTime);
+            CharController.Move(m_finalMoveVector * Time.deltaTime);
         }
 
         protected virtual void RotateTowardsCamera()
