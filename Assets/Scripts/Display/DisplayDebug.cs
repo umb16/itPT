@@ -25,7 +25,7 @@ public class DisplayDebug
             _displayCenter = new Vector2Int(_display.SizeX / 2, _display.SizeY / 2);
             //Debug.Log("_displayCenter " + _displayCenter);
             //Debug.Log("_displaySize " + _display.SizeX + " " + _display.SizeY);
-            _displayWriter.SetCursorPos(0, _displayCenter.y);
+            /*_displayWriter.SetCursorPos(0, _displayCenter.y);
             _displayWriter.Print(new string('.', _display.SizeX), true);
             _displayWriter.SetCursorPos(0, _displayCenter.y);
             _displayWriter.Print("B", true);
@@ -36,7 +36,7 @@ public class DisplayDebug
             _displayWriter.SetCursorPos(_displayCenter.x, 0);
             _displayWriter.Print("B", true);
             _displayWriter.SetCursorPos(_displayCenter.x, -1);
-            _displayWriter.Print("B", true);
+            _displayWriter.Print("B", true);*/
 
             int lenght = 14;
             int shift = ((lenght + 1) * 3 + 2) / 2;

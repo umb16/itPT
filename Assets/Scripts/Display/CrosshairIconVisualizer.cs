@@ -1,9 +1,5 @@
 using Cysharp.Threading.Tasks.Linq;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using Zenject;
 using Cysharp.Threading.Tasks;
 
 public class CrosshairIconVisualizer

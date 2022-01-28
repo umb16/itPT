@@ -19,8 +19,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 363
     y: -190
-    width: 1004
-    height: 2108
+    width: 1002
+    height: 2092
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2813,7 +2813,7 @@ MonoBehaviour:
   m_Children:
   - {fileID: 8926484042661614712}
   - {fileID: 8926484042661614713}
-  m_UIPosition: {x: 943, y: 1464}
+  m_UIPosition: {x: 941, y: 1464}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -2829,7 +2829,7 @@ MonoBehaviour:
       slotIndex: 0
   m_OutputFlowSlot:
   - link: []
-  blendMode: 1
+  blendMode: 3
   useAlphaClipping: 0
   generateMotionVector: 0
   excludeFromTAA: 0
@@ -3038,13 +3038,13 @@ MonoBehaviour:
   m_InputSlots:
   - {fileID: 8926484042661614714}
   m_OutputSlots: []
-  m_Disabled: 0
+  m_Disabled: 1
   attribute: color
   Composition: 0
   AlphaComposition: 0
   SampleMode: 0
   Mode: 1
-  ColorMode: 3
+  ColorMode: 1
   channels: 6
 --- !u!114 &8926484042661614714
 MonoBehaviour:
