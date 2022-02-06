@@ -11,6 +11,7 @@ public class Hand
     private InHandPoint _inHandPoint;
     private bool isEmpty => _interactiveObject == null;
     private InteractiveObject _interactiveObject;
+    private int _ignorePlayerLayer = LayerMask.NameToLayer("TransparentFX");
     public Hand(CrosshairRaycast crosshairRaycast, Display display, DisplayWriter displayWriter, InHandPoint inHandPoint)
     {
         _crosshairRaycast = crosshairRaycast;
@@ -49,7 +50,7 @@ public class Hand
             {
                 Debug.Log("Hand ->" + _interactiveObject.name);
                 _interactiveObject.transform.SetParent(null);
-                _interactiveObject.ToFreeMode(_crosshairRaycast.GlobalDir * 100);
+                _interactiveObject.ToFreeMode(_crosshairRaycast.GlobalDir * 100, _ignorePlayerLayer);
                 _interactiveObject = null;
             }
         }
