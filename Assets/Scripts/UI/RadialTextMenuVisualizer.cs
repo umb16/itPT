@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using System.Collections.Generic;
 using TMPro;
@@ -62,7 +61,6 @@ public class RadialTextMenuVisualizer : MonoBehaviour
         }
     }
 
-    [EditorButton]
     private void SetTexts()
     {
         SetTexts((string[])Texts.Clone());
