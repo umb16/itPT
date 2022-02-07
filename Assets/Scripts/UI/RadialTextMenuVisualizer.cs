@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class RadialTextMenuVisualizer : MonoBehaviour
 {
@@ -15,14 +16,30 @@ public class RadialTextMenuVisualizer : MonoBehaviour
     private float _startAnimTime = 0;
     private int _activeCount = 0;
 
-    [EditorButton]
-    private void SetTexts()
+    private CrosshairRaycast _crosshairRaycast;
+
+    [Inject]
+    private void Construct(CrosshairRaycast crosshairRaycast)
+    {
+        _crosshairRaycast = crosshairRaycast;
+        UniTaskAsyncEnumerable.EveryValueChanged(_crosshairRaycast, x => x.HitInteractiveObject).Subscribe(x =>
+        {
+            if (x != null)
+            {
+                SetTexts();
+            }
+            else
+            {
+                SetTexts(new string[0]);
+            }
+        });
+    }
+
+    public void SetTexts(string[] texts)
     {
         _startAnimTime = Time.time;
         _activeCount = 0;
-        _texts = new string[Texts.Length];
-        Texts.CopyTo(_texts, 0);
-        Debug.Log("changed");
+        _texts = texts;
         for (int i = 0; i < _tmpTexts.Length; i++)
         {
             TMP_Text text = _tmpTexts[i];
@@ -44,8 +61,18 @@ public class RadialTextMenuVisualizer : MonoBehaviour
             }
         }
     }
+
+    [EditorButton]
+    private void SetTexts()
+    {
+        SetTexts((string[])Texts.Clone());
+    }
+
+
+
     private void Update()
     {
+
         float timeSince = Time.time - _startAnimTime;
         float timeSinceScaled = timeSince * _texts.Length * 2;
         int count = Mathf.Max(_activeCount, Mathf.Min(_texts.Length, Mathf.FloorToInt(timeSinceScaled + 1)));
@@ -56,10 +83,10 @@ public class RadialTextMenuVisualizer : MonoBehaviour
         {
             var text = _tmpTexts[i];
             text.transform.localPosition = Vector3.Lerp(text.transform.localPosition, new Vector3(-40 + i * 10 - countMinus1 * 5, -40 * (i - countMinus1 * .5f), 0), Time.deltaTime * speed);
-            if (i >= _activeCount)
+            if (i >= _activeCount || _tmpTexts[i].transform.localScale.x < 1)
             {
-                text.transform.localEulerAngles = Vector3.Lerp(Vector3.zero, new Vector3(0, 0, (9 - countMinus1 *.5f) * i), timeSinceScaled - i);
-                _tmpTexts[i].transform.localScale = Vector3.Lerp(new Vector3(0, 1, 1), Vector3.one, timeSinceScaled - i);
+                text.transform.localEulerAngles = Vector3.Lerp(Vector3.zero, new Vector3(0, 0, (9 - countMinus1 * .5f) * i), timeSinceScaled - i);
+                _tmpTexts[i].transform.localScale = Vector3.Lerp(_tmpTexts[i].transform.localScale, Vector3.one, timeSinceScaled - i + Time.deltaTime * speed);
             }
         }
         float timeSincex2 = timeSince * 3;
@@ -67,12 +94,14 @@ public class RadialTextMenuVisualizer : MonoBehaviour
         {
             var text = _tmpTexts[i];
             if (timeSincex2 < 1)
+            {
                 text.color = Color.Lerp(Color.black, new Color(0, 0, 0, 0), timeSincex2);
+            }
             if (timeSincex2 > 1)
                 text.gameObject.SetActive(false);
         }
 
-        for (int i = 0; i < _activeCount; i++)
+        for (int i = 0; i < Mathf.Min(_activeCount, _texts.Length); i++)
         {
             var text = _tmpTexts[i];
             if (_texts[i] != text.text || text.color != Color.black)
