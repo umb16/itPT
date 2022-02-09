@@ -1,11 +1,7 @@
 {
-    "name": "itPF.Interaction",
+    "name": "ipTF.Localization",
     "rootNamespace": "",
     "references": [
-        "GUID:f51ebe6a0ceec4240a699833d6309b23",
-        "GUID:5c01796d064528144a599661eaab93a6",
-        "GUID:d170e2d7f986a1245ac419570f532705",
-        "GUID:a3c94cea8f1a00a45b6e8f7b84b2597e",
         "GUID:fa1295589a2824b45bf7a69d7a9b4dc6"
     ],
     "includePlatforms": [],

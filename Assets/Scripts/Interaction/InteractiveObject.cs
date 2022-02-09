@@ -2,23 +2,12 @@ using Cysharp.Threading.Tasks;
 using System.Linq;
 using System.Threading;
 using UnityEngine;
-
-public enum ObjectMobility
-{
-    Static,
-    Movable,
-    Portable,
-    Pocket
-}
-public enum ObjectType
-{
-    Thing,
-    Tool,
-}
 public class InteractiveObject : MonoBehaviour
 {
     [SerializeField] ObjectMobility _mobility;
     [SerializeField] ObjectType _type;
+    [SerializeField] LocKeysStableEnum _nameLocKey;
+    public LocKeys LocKey => _nameLocKey;
     public ObjectMobility Mobility => _mobility;
     public float Mass => _rigidbody == null ? float.PositiveInfinity : _rigidbody.mass;
 

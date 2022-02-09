@@ -17,7 +17,7 @@ namespace Iptf.RadialMenuVisual
         private float _startScale = 1;
         private string _newText = "";
         [Inject]
-        private void Construct(CrosshairRaycast crosshairRaycast)
+        private void Construct(CrosshairRaycast crosshairRaycast, LocalizationManager localizationManager)
         {
             UniTaskAsyncEnumerable.EveryValueChanged(crosshairRaycast, x => x.HitInteractiveObject).Subscribe(x =>
             {
@@ -26,7 +26,7 @@ namespace Iptf.RadialMenuVisual
                 {
                     if (_state == MenuElementState.Disabled)
                     {
-                        _text.text = x.name;
+                        _text.text = localizationManager.GetPhrase(x.LocKey);
                         _state = MenuElementState.Showing;
                         _text.color = Color.black;
                         _startScale = 0;
@@ -38,7 +38,7 @@ namespace Iptf.RadialMenuVisual
                         _state = MenuElementState.Changing;
                         _startScale = _text.transform.localScale.x;
                         _startAlpha = _text.color.a;
-                        _newText = x.name;
+                        _newText = localizationManager.GetPhrase(x.LocKey);
                     }
                 }
                 else

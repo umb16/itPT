@@ -26,7 +26,7 @@ public class InHandPoint : MonoBehaviour
 
         UniTaskAsyncEnumerable.EveryValueChanged(_cameraPivot, x => x.localRotation).Subscribe(x =>
         {
-            transform.localRotation = Quaternion.Lerp(x, startRotation, .5f);
+            transform.localRotation = Quaternion.Lerp(x, startRotation, .1f);
         }, cancellationToken: this.GetCancellationTokenOnDestroy());
     }
 
