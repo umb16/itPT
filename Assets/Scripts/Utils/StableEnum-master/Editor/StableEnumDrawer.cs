@@ -69,7 +69,7 @@ public class StableEnumDrawer : PropertyDrawer
                 UpdateOptions(Enum.GetNames(enumValue.GetType()));
             }
         }
-        Debug.Log("selectedIndex " + selectedIndex);
+        //Debug.Log("selectedIndex " + selectedIndex);
     }
 
     private string search;

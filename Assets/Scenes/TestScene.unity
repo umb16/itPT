@@ -2552,9 +2552,9 @@ MonoBehaviour:
   _mobility: 2
   _type: 0
   _nameLocKey:
-    _proxy: Open
-    _index: 1
-    _value: 1
+    _proxy: Box
+    _index: 5
+    _value: 5
 --- !u!65 &426902274
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5736,6 +5736,7 @@ MonoBehaviour:
   - {fileID: 1354860841}
   - {fileID: 1354860840}
   - {fileID: 1354860837}
+  - {fileID: 1354860842}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -7112,6 +7113,7 @@ GameObject:
   - component: {fileID: 1631486695}
   - component: {fileID: 1631486694}
   - component: {fileID: 1631486693}
+  - component: {fileID: 1631486699}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -7150,9 +7152,9 @@ MonoBehaviour:
   _mobility: 2
   _type: 0
   _nameLocKey:
-    _proxy: Take
-    _index: 3
-    _value: 3
+    _proxy: Box2
+    _index: 6
+    _value: 6
 --- !u!65 &1631486695
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7231,6 +7233,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1631486699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631486692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a8521fe0e647d44c8d8ea1b2d889760, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1652824403
 GameObject:
   m_ObjectHideFlags: 0

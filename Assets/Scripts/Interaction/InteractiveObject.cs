@@ -40,6 +40,9 @@ public class InteractiveObject : MonoBehaviour
     }
     private void Start()
     {
+        var actions = GetComponents<IAction>();
+        foreach (var action in actions)
+           Debug.Log("action "+action.Name);
         _startLayer = gameObject.layer;
         _rigidbody = GetComponent<Rigidbody>();
     }
