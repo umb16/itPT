@@ -79,9 +79,6 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{198b4ed9-50a8-4419-909c-697d8514ee09}">
-		<property name="volume">
-			<value>-8.5</value>
-		</property>
 		<relationship name="effectChain">
 			<destination>{deb820d9-e841-49f1-848b-e9e8c5191841}</destination>
 		</relationship>
@@ -326,7 +323,7 @@
 			<value>DAType</value>
 		</property>
 		<property name="value">
-			<value>2</value>
+			<value>4</value>
 		</property>
 		<property name="minimumValue">
 			<value>0</value>

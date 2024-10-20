@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="Workspace" id="{8c5b2160-49df-4a51-b905-962f08c87fb4}">
+		<property name="builtBanksOutputDirectory">
+			<value>../../../../Godot/TestFMOD/FmodBanks</value>
+		</property>
 		<relationship name="masterEventFolder">
 			<destination>{80e3a493-34b2-4f27-b1ad-b5224180a3bd}</destination>
 		</relationship>

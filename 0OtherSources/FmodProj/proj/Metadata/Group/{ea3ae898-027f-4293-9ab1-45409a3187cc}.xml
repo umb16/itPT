@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="MixerGroup" id="{ea3ae898-027f-4293-9ab1-45409a3187cc}">
+		<property name="name">
+			<value>Battle</value>
+		</property>
+		<relationship name="automators">
+			<destination>{3e917a16-53ce-45bb-a7a0-b63450d93f82}</destination>
+		</relationship>
+		<relationship name="effectChain">
+			<destination>{b1ddde69-f429-461f-84ce-8753324baae7}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{818ff63c-c7cd-4958-9d49-cf119e5d35cd}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{44e1525d-e0a7-4295-a133-86f2af698759}</destination>
+		</relationship>
+	</object>
+	<object class="Automator" id="{3e917a16-53ce-45bb-a7a0-b63450d93f82}">
+		<property name="nameOfPropertyBeingAutomated">
+			<value>volume</value>
+		</property>
+	</object>
+	<object class="MixerBusEffectChain" id="{b1ddde69-f429-461f-84ce-8753324baae7}">
+		<relationship name="effects">
+			<destination>{114f3fec-54c5-4636-8211-cd8ff98c6ec0}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{818ff63c-c7cd-4958-9d49-cf119e5d35cd}" />
+	<object class="MixerBusFader" id="{114f3fec-54c5-4636-8211-cd8ff98c6ec0}" />
+</objects>
